@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from __future__ import absolute_import
+
 
 from pyvat import is_vat_number_format_valid
 
@@ -105,7 +105,7 @@ class Customer(BaseBillingEntity):
 
     @property
     def name(self):
-        return u"%s %s" % (self.first_name, self.last_name)
+        return "%s %s" % (self.first_name, self.last_name)
 
     def __str__(self):
         return self.name

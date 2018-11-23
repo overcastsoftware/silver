@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from __future__ import absolute_import
+
 
 from django.conf import settings
 from django.template.loader import select_template
@@ -31,7 +31,7 @@ def get_instance(name):
 
 def get_all_instances():
     choices = []
-    for processor_import_path in settings.PAYMENT_PROCESSORS.keys():
+    for processor_import_path in list(settings.PAYMENT_PROCESSORS.keys()):
         choices.append(get_instance(processor_import_path))
     return choices
 

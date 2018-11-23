@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from __future__ import absolute_import
+
 
 import datetime
 import json
@@ -139,7 +139,7 @@ class TestSubscriptionEndpoint(APITestCase):
 
         assert response.status_code == status.HTTP_400_BAD_REQUEST
         assert response.data == {
-            'error': u'Cannot activate subscription from canceled state.'
+            'error': 'Cannot activate subscription from canceled state.'
         }
 
     @freeze_time('2017-02-05')
@@ -174,7 +174,7 @@ class TestSubscriptionEndpoint(APITestCase):
 
         assert response.status_code == status.HTTP_400_BAD_REQUEST
         assert response.data == {
-            'error': u'Cannot cancel subscription from inactive state.'
+            'error': 'Cannot cancel subscription from inactive state.'
         }
 
         assert subscription.state == Subscription.STATES.INACTIVE
@@ -206,7 +206,7 @@ class TestSubscriptionEndpoint(APITestCase):
 
         assert response.status_code == status.HTTP_400_BAD_REQUEST
         assert response.data == {
-            'error': u'Cannot cancel subscription from inactive state.'
+            'error': 'Cannot cancel subscription from inactive state.'
         }
 
     def test_reactivate_subscription(self):
@@ -239,7 +239,7 @@ class TestSubscriptionEndpoint(APITestCase):
 
         assert response.status_code == status.HTTP_400_BAD_REQUEST
         assert response.data == {
-            'error': u'Cannot reactivate subscription from ended state.'
+            'error': 'Cannot reactivate subscription from ended state.'
         }
 
     def test_get_subscription_list(self):
@@ -329,7 +329,7 @@ class TestSubscriptionEndpoint(APITestCase):
         response = self.client.get(url)
 
         assert response.status_code == status.HTTP_404_NOT_FOUND
-        assert response.data == {u'detail': u'Not found.'}
+        assert response.data == {'detail': 'Not found.'}
 
     def test_create_subscription_mf_units_log_active_sub(self):
         subscription = SubscriptionFactory.create()

@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from __future__ import absolute_import
+
 
 import six
 
@@ -66,7 +66,7 @@ class TestPaymentsUtilMethods(TestCase):
         mocked_view = MagicMock()
         token = _get_jwt_token(transaction)
 
-        self.assertEquals(get_transaction_from_token(mocked_view)(None, token),
+        self.assertEqual(get_transaction_from_token(mocked_view)(None, token),
                           mocked_view())
         mocked_view.has_calls([call(None, transaction, False), call()])
 
@@ -78,6 +78,6 @@ class TestPaymentsUtilMethods(TestCase):
             mocked_datetime.utcnow.return_value = datetime.utcnow() - timedelta(days=2 * 365)
             token = _get_jwt_token(transaction)
 
-        self.assertEquals(get_transaction_from_token(mocked_view)(None, token),
+        self.assertEqual(get_transaction_from_token(mocked_view)(None, token),
                           mocked_view())
         mocked_view.has_calls([call(None, transaction, True), call()])

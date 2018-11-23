@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from __future__ import absolute_import
+
 
 import json
 
@@ -443,7 +443,7 @@ class TestProformaEndpoints(APITestCase):
         }
         assert response.status_code == status.HTTP_200_OK
         assert all(item in list(response.data.items())
-                   for item in mandatory_content.items())
+                   for item in list(mandatory_content.items()))
         assert response.data.get('archived_provider', {}) != {}
         assert response.data.get('archived_customer', {}) != {}
         assert Invoice.objects.count() == 0
@@ -466,7 +466,7 @@ class TestProformaEndpoints(APITestCase):
         }
         assert response.status_code == status.HTTP_200_OK
         assert all(item in list(response.data.items())
-                   for item in mandatory_content.items())
+                   for item in list(mandatory_content.items()))
         assert response.data.get('archived_provider', {}) != {}
         assert response.data.get('archived_customer', {}) != {}
         assert Invoice.objects.count() == 0
@@ -495,7 +495,7 @@ class TestProformaEndpoints(APITestCase):
         }
         assert response.status_code == status.HTTP_200_OK
         assert all(item in list(response.data.items())
-                   for item in mandatory_content.items())
+                   for item in list(mandatory_content.items()))
         assert response.data.get('archived_provider', {}) != {}
         assert response.data.get('archived_customer', {}) != {}
         assert Invoice.objects.count() == 0
@@ -556,7 +556,7 @@ class TestProformaEndpoints(APITestCase):
         }
         assert response.status_code == status.HTTP_200_OK
         assert all(item in list(response.data.items())
-                   for item in mandatory_content.items())
+                   for item in list(mandatory_content.items()))
 
         invoice = Invoice.objects.all()[0]
         assert proforma.related_document == invoice
@@ -590,7 +590,7 @@ class TestProformaEndpoints(APITestCase):
         }
         assert response.status_code == status.HTTP_200_OK
         assert all(item in list(response.data.items())
-                   for item in mandatory_content.items())
+                   for item in list(mandatory_content.items()))
 
         invoice = Invoice.objects.all()[0]
         assert proforma.related_document == invoice
@@ -642,7 +642,7 @@ class TestProformaEndpoints(APITestCase):
         }
         assert response.status_code == status.HTTP_200_OK
         assert all(item in list(response.data.items())
-                   for item in mandatory_content.items())
+                   for item in list(mandatory_content.items()))
         assert Invoice.objects.count() == 0
 
     def test_cancel_proforma_with_provided_date(self):
@@ -669,7 +669,7 @@ class TestProformaEndpoints(APITestCase):
         }
         assert response.status_code == status.HTTP_200_OK
         assert all(item in list(response.data.items())
-                   for item in mandatory_content.items())
+                   for item in list(mandatory_content.items()))
         assert Invoice.objects.count() == 0
 
     def test_cancel_proforma_in_draft_state(self):

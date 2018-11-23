@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from __future__ import absolute_import
+
 
 from django.core import validators
 from django.core.exceptions import ValidationError
@@ -21,5 +21,5 @@ from django.utils.module_loading import import_string
 
 validate_reference = validators.RegexValidator(
     regex=r'^[^,]*$',
-    message=u'Reference must not contain commas.'
+    message='Reference must not contain commas.'
 )

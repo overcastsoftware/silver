@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from __future__ import absolute_import
+
 
 from itertools import cycle
 from mock import MagicMock, patch
@@ -20,7 +20,7 @@ from mock import MagicMock, patch
 from django.contrib.admin.models import CHANGE
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.utils.encoding import force_text
 from django.test import TestCase, Client
 from django_fsm import TransitionNotAllowed

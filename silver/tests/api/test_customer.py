@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from __future__ import absolute_import
+
 
 import json
 import pytest
@@ -134,7 +134,7 @@ class TestCustomerEndpoints(APITestCase):
         response = self.client.get(url)
 
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
-        self.assertEqual(response.data, {u'detail': u'Not found.'})
+        self.assertEqual(response.data, {'detail': 'Not found.'})
 
     def test_delete_customer(self):
         customer = CustomerFactory.create()

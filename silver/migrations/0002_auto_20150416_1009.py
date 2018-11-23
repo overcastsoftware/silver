@@ -14,9 +14,10 @@
 
 
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+
 
 from django.db import models, migrations
+import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
@@ -39,6 +40,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='plan',
             name='product_code',
-            field=models.ForeignKey(help_text=b'The product code for this plan.', to='silver.ProductCode'),
+            field=models.ForeignKey(help_text=b'The product code for this plan.', to='silver.ProductCode', on_delete=django.db.models.deletion.CASCADE),
         ),
     ]

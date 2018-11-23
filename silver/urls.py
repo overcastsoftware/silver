@@ -15,7 +15,7 @@
 
 """URLs for the silver app."""
 
-from __future__ import absolute_import
+
 
 from django.conf.urls import include, url
 from django.contrib import admin
@@ -29,7 +29,7 @@ admin.autodiscover()
 
 
 urlpatterns = [
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls',
                                namespace='rest_framework')),
     url(r'', include('silver.api.urls')),

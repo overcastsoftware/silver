@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from __future__ import absolute_import, unicode_literals
+
 
 from annoying.fields import JSONField
 from livefield import LiveModel
@@ -75,5 +75,5 @@ class BaseBillingEntity(LiveModel):
         return {field: getattr(self, field, '') for field in field_names}
 
     def __str__(self):
-        return (u'%s (%s)' % (self.name, self.company) if self.company
+        return ('%s (%s)' % (self.name, self.company) if self.company
                 else self.name)

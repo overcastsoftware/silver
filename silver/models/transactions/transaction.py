@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from __future__ import absolute_import, unicode_literals
+
 
 import uuid
 import logging
@@ -68,7 +68,7 @@ class Transaction(models.Model):
 
         @classmethod
         def as_list(cls):
-            return [getattr(cls, state) for state in vars(cls).keys() if
+            return [getattr(cls, state) for state in list(vars(cls).keys()) if
                     state[0].isupper()]
 
         @classmethod
@@ -83,11 +83,11 @@ class Transaction(models.Model):
                      default=States.Initial)
 
     proforma = models.ForeignKey("BillingDocumentBase", null=True, blank=True,
-                                 related_name='proforma_transactions')
+                                 related_name='proforma_transactions', on_delete=models.CASCADE)
     invoice = models.ForeignKey("BillingDocumentBase", null=True, blank=True,
-                                related_name='invoice_transactions')
+                                related_name='invoice_transactions', on_delete=models.CASCADE)
 
-    payment_method = models.ForeignKey('PaymentMethod')
+    payment_method = models.ForeignKey('PaymentMethod', on_delete=models.CASCADE)
     uuid = models.UUIDField(default=uuid.uuid4)
     valid_until = models.DateTimeField(null=True, blank=True)
     last_access = models.DateTimeField(null=True, blank=True)
@@ -96,15 +96,15 @@ class Transaction(models.Model):
     updated_at = AutoDateTimeField(default=timezone.now)
 
     fail_code = models.CharField(
-        choices=[(code, code) for code in FAIL_CODES.keys()], max_length=32,
+        choices=[(code, code) for code in list(FAIL_CODES.keys())], max_length=32,
         null=True, blank=True
     )
     refund_code = models.CharField(
-        choices=[(code, code) for code in REFUND_CODES.keys()], max_length=32,
+        choices=[(code, code) for code in list(REFUND_CODES.keys())], max_length=32,
         null=True, blank=True
     )
     cancel_code = models.CharField(
-        choices=[(code, code) for code in CANCEL_CODES.keys()], max_length=32,
+        choices=[(code, code) for code in list(CANCEL_CODES.keys())], max_length=32,
 
         null=True, blank=True
     )

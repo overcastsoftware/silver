@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from __future__ import absolute_import
+
 
 import datetime as dt
 import logging
@@ -145,7 +145,7 @@ class DocumentsGenerator(object):
                 subscription, billing_date, document=existing_document
             )
 
-        for provider, document in existing_provider_documents.items():
+        for provider, document in list(existing_provider_documents.items()):
             if provider.default_document_state == Provider.DEFAULT_DOC_STATE.ISSUED:
                 document.issue()
 

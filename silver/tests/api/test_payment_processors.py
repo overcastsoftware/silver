@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from __future__ import absolute_import
+
 
 from django.test import override_settings
 
@@ -63,8 +63,8 @@ class TestPaymentProcessorsEndpoints(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data, {
-            'name': u'manual',
-            'type': u'manual',
+            'name': 'manual',
+            'type': 'manual',
             'allowed_currencies': [],
             'url': build_absolute_test_url(reverse('payment-processor-detail', ['manual']))
         })

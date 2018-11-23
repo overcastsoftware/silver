@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from __future__ import absolute_import
+
 
 from django.core.exceptions import ObjectDoesNotExist, ValidationError, NON_FIELD_ERRORS
 
@@ -93,7 +93,7 @@ class PaymentMethodSerializer(serializers.HyperlinkedModelSerializer):
                 payment_method = self.instance
                 payment_method_dict = payment_method.__dict__.copy()
 
-                for attribute, value in attrs.items():
+                for attribute, value in list(attrs.items()):
                     setattr(payment_method, attribute, value)
 
                 payment_method.full_clean()

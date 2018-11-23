@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from __future__ import absolute_import, unicode_literals
+
 
 from itertools import chain
 
@@ -45,16 +45,16 @@ class PaymentMethod(models.Model):
     class PaymentProcessors:
         @classmethod
         def as_choices(cls):
-            for name in settings.PAYMENT_PROCESSORS.keys():
+            for name in list(settings.PAYMENT_PROCESSORS.keys()):
                 yield (name, name)
 
         @classmethod
         def as_list(cls):
-            return [name for name in settings.PAYMENT_PROCESSORS.keys()]
+            return [name for name in list(settings.PAYMENT_PROCESSORS.keys())]
 
     payment_processor = models.CharField(choices=PaymentProcessors.as_choices(),
                                          blank=False, null=False, max_length=256)
-    customer = models.ForeignKey(Customer)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
     added_at = models.DateTimeField(default=timezone.now)
     data = JSONField(blank=True, null=True, default={})
 
@@ -188,7 +188,7 @@ class PaymentMethod(models.Model):
         return {}
 
     def __str__(self):
-        return u'{} - {} - {}'.format(self.customer,
+        return '{} - {} - {}'.format(self.customer,
                                       self.get_payment_processor_display(),
                                       self.pk)
 

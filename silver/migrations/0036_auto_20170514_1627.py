@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
-from __future__ import unicode_literals
+
 
 import uuid
 from itertools import chain
 
 from django.db import migrations, models
+import django.db.models.deletion
 
 import silver.models.documents.pdf
 
@@ -71,12 +72,12 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='invoice',
             name='pdf',
-            field=models.ForeignKey(to='silver.PDF', null=True),
+            field=models.ForeignKey(to='silver.PDF', null=True, on_delete=django.db.models.deletion.CASCADE),
         ),
         migrations.AddField(
             model_name='proforma',
             name='pdf',
-            field=models.ForeignKey(to='silver.PDF', null=True),
+            field=models.ForeignKey(to='silver.PDF', null=True, on_delete=django.db.models.deletion.CASCADE),
         ),
 
         migrations.RunPython(move_pdf_from_documents_to_model,

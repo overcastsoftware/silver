@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from __future__ import absolute_import, unicode_literals
+
 
 import calendar
 import logging
@@ -63,8 +63,8 @@ def field_template_path(field, provider=None):
 
 @python_2_unicode_compatible
 class MeteredFeatureUnitsLog(models.Model):
-    metered_feature = models.ForeignKey('MeteredFeature', related_name='consumed')
-    subscription = models.ForeignKey('Subscription', related_name='mf_log_entries')
+    metered_feature = models.ForeignKey('MeteredFeature', related_name='consumed', on_delete=models.CASCADE)
+    subscription = models.ForeignKey('Subscription', related_name='mf_log_entries', on_delete=models.CASCADE)
     consumed_units = models.DecimalField(max_digits=19, decimal_places=4,
                                          validators=[MinValueValidator(0.0)])
     start_date = models.DateField(editable=False)
@@ -147,12 +147,12 @@ class Subscription(models.Model):
 
     plan = models.ForeignKey(
         'Plan',
-        help_text='The plan the customer is subscribed to.'
+        help_text='The plan the customer is subscribed to.', on_delete=models.CASCADE
     )
     description = models.CharField(max_length=1024, blank=True, null=True)
     customer = models.ForeignKey(
         'Customer', related_name='subscriptions',
-        help_text='The customer who is subscribed to the plan.'
+        help_text='The customer who is subscribed to the plan.', on_delete=models.CASCADE
     )
     trial_end = models.DateField(
         blank=True, null=True,
@@ -1008,17 +1008,17 @@ class Subscription(models.Model):
         return base_context
 
     def __str__(self):
-        return u'%s (%s)' % (self.customer, self.plan)
+        return '%s (%s)' % (self.customer, self.plan)
 
 
 @python_2_unicode_compatible
 class BillingLog(models.Model):
     subscription = models.ForeignKey('Subscription',
-                                     related_name='billing_logs')
+                                     related_name='billing_logs', on_delete=models.CASCADE)
     invoice = models.ForeignKey('BillingDocumentBase', null=True, blank=True,
-                                related_name='invoice_billing_logs')
+                                related_name='invoice_billing_logs', on_delete=models.CASCADE)
     proforma = models.ForeignKey('BillingDocumentBase', null=True, blank=True,
-                                 related_name='proforma_billing_logs')
+                                 related_name='proforma_billing_logs', on_delete=models.CASCADE)
     billing_date = models.DateField(
         help_text="The date when the invoice/proforma was issued."
     )
@@ -1046,7 +1046,7 @@ class BillingLog(models.Model):
         ordering = ['-billing_date']
 
     def __str__(self):
-        return u'{sub} - {pro} - {inv} - {date}'.format(
+        return '{sub} - {pro} - {inv} - {date}'.format(
             sub=self.subscription, pro=self.proforma,
             inv=self.invoice, date=self.billing_date)
 
