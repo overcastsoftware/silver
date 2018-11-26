@@ -160,7 +160,7 @@ class MeteredFeatureUnitsLogInLine(TabularInline):
     def formfield_for_foreignkey(self, db_field, request=None, **kwargs):
         if db_field.name == 'metered_feature' and hasattr(self, 'parent_obj'):
             if self.parent_obj:
-                kwargs['queryset'] = db_field.rel.to.objects.filter(**{
+                kwargs['queryset'] = db_field.remote_field.to.objects.filter(**{
                     'plan': self.parent_obj.plan
                 })
         return super(MeteredFeatureUnitsLogInLine,
